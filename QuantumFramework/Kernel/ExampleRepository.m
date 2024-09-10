@@ -333,7 +333,9 @@ CheapGradient[f_, vars_List, values_ ? VectorQ]:=Module[{permutedVars,nd},
 
 		permutedVars=TakeDrop[#,{1}]&/@NestList[RotateLeft,Thread[vars->values],Length[vars]-1];
 		
+		Parallelize[
 		centralFiniteDifference[f@@(vars/.#[[2]]),Sequence@@First@#[[1]]]&/@permutedVars
+		]
 		
 ]
 
